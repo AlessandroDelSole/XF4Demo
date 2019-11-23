@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Padding="0,20,0,0"
+             x:Class="XF4Demo.Views.RefreshViewPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView RefreshColor="Teal" IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshCommand}">
+                
+                <CollectionView x:Name="ProductList" ItemsSource="{Binding Products}"
+                SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                SelectionChangedCommand="{Binding ProductSelectionCommand}"
+                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="34"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding ProductImage}" HeightRequest="32" />
+                                <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="5">
+                                    <Label Text="{Binding ProductName}" FontSize="Large"
+                TextColor="Blue"/>
+                                    <Label Text="{Binding ProductQuantity}" FontSize="Medium"
+                TextColor="Black"/>
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.EmptyView>
+                        <Label Text="No data is available" TextColor="Red" FontSize="Large"/>
+                    </CollectionView.EmptyView>
+
+                    <!--<CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical" Spacing="20">
+                            <Image Source="EmptyList.png" Aspect="Fill"/>
+                            <Label Text="No data is available" TextColor="Red"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>-->
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

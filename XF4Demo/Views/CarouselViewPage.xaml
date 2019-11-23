@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Padding="0,20,0,0"
+             x:Class="XF4Demo.Views.CarouselViewPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <CarouselView x:Name="ProductList" ItemsSource="{Binding Products}" 
+                          CurrentItemChanged="ProductList_CurrentItemChanged" 
+                          PositionChanged="ProductList_PositionChanged"
+                          CurrentItem="{Binding SelectedProduct}">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                     SnapPointsAlignment="Center"
+                     SnapPointsType="Mandatory"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding ProductImage}" HeightRequest="200" VerticalOptions="Center" />
+                            <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center"
+                     Spacing="5" HorizontalOptions="CenterAndExpand">
+                                <Label Text="{Binding ProductName}" FontSize="Large"
+                 TextColor="Blue"/>
+                                <Label Text="{Binding ProductQuantity}" FontSize="Medium"
+                 TextColor="Black"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+                <CarouselView.EmptyView>
+                    <Label Text="No data is available" TextColor="Red"
+           FontSize="Medium"/>
+                </CarouselView.EmptyView>
+            </CarouselView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
